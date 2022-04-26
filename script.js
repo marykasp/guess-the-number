@@ -3,6 +3,7 @@
 let secretNum = Math.floor(Math.random() * 21);
 console.log(secretNum)
 let score = 20;
+let highscore = 0;
 // ********* Selectors *********
 const button = document.querySelector(".check");
 const guessInput = document.querySelector(".guess");
@@ -11,7 +12,7 @@ const divNumber = document.querySelector(".number");
 const scoreSpan = document.querySelector(".score");
 const body = document.querySelector("body");
 const playAgain = document.querySelector(".again")
-
+const highscoreSpan = document.querySelector(".highscore")
 
 // display secret number on webpage
 const displayNumber = function() {
@@ -35,29 +36,26 @@ button.addEventListener("click", function() {
       // change the background color of the body
       body.style.backgroundColor = "#60b347";
       // change number div
-      divNumber.style.width = "30rem"
-    } else if(guess > secretNum) {
+      divNumber.style.width = "30rem";
+
+      // check if score is greater than high score
+      if(score > highscore) {
+        highscore = score;
+      }
+      // display the new high score
+      highscoreSpan.innerText = highscore
+    } else if(guess !== secretNum) {
       if(score > 1) {
-        message.textContent = "📈 Guess is too high!"
-        // decrease score
+        message.textContent = guess > secretNum ? "📈 Guess is too high!" : "📉 Guess is too low! Try again"
+
+        // decrease the score
         score -= 1
         scoreSpan.innerText = score
       } else {
-        message.textContent = "You lost the game!"
+        message.textContent = "You lost the game!";
+        scoreSpan.innerText = 0;
       }
-
-    } else if (guess < secretNum) {
-      if(score > 1) {
-        message.textContent = "📉 Guess is too low! Try again"
-        // decrease score
-        score -= 1
-        scoreSpan.innerText = score
-      } else {
-        message.textContent = "You lost the game!"
-      }
-
     }
-
 })
 
 // play again button
