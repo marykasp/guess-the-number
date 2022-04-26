@@ -8,13 +8,15 @@ const button = document.querySelector(".check");
 const guessInput = document.querySelector(".guess");
 const message = document.querySelector(".message");
 const divNumber = document.querySelector(".number");
-const scoreSpan = document.querySelector(".score")
+const scoreSpan = document.querySelector(".score");
+const body = document.querySelector("body");
+
 
 // display secret number on webpage
 const displayNumber = function() {
   divNumber.innerText = secretNum
 }
-displayNumber();
+
 
 // ******* Event Listener *********
 button.addEventListener("click", function() {
@@ -23,12 +25,16 @@ button.addEventListener("click", function() {
     // if guess has no value, returns false, so if block will run
     if(!guess) {
       message.textContent = "🚫 No number!"
+
+      // when player wins
     } else if(guess === secretNum) {
       message.textContent = "🎉 Yay! You got it correct";
-      // update score - increment
-      score += 1
-      // update span score element in DOM
-      scoreSpan.innerText = score
+      // display the secret number
+      divNumber.innerText = secretNum
+      // change the background color of the body
+      body.style.backgroundColor = "#60b347";
+      // change number div
+      divNumber.style.width = "30rem"
     } else if(guess > secretNum) {
       if(score > 1) {
         message.textContent = "📈 Guess is too high!"
