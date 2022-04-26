@@ -1,6 +1,6 @@
 'use strict';
 // Global variables
-const secretNum = Math.floor(Math.random() * 21);
+let secretNum = Math.floor(Math.random() * 21);
 console.log(secretNum)
 let score = 20;
 // ********* Selectors *********
@@ -10,6 +10,7 @@ const message = document.querySelector(".message");
 const divNumber = document.querySelector(".number");
 const scoreSpan = document.querySelector(".score");
 const body = document.querySelector("body");
+const playAgain = document.querySelector(".again")
 
 
 // display secret number on webpage
@@ -59,3 +60,21 @@ button.addEventListener("click", function() {
 
 })
 
+// play again button
+playAgain.addEventListener("click", function() {
+  // reset score back to initial value
+  score = 20
+  scoreSpan.textContent = score;
+  // create a new secret number - reassing its value
+  secretNum = Math.floor(Math.random() * 21);
+  console.log(secretNum)
+  // reset message
+  message.textContent = "Start guessing..."
+  // reset input value
+  guessInput.value = ""
+  // clear secret number
+  divNumber.textContent = "?"
+  divNumber.style.width = "15rem"
+  // restore background color
+  body.style.backgroundColor = "#222"
+})
