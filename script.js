@@ -2,7 +2,7 @@
 // Global variables
 const secretNum = Math.floor(Math.random() * 21);
 console.log(secretNum)
-let score = 0;
+let score = 20;
 // ********* Selectors *********
 const button = document.querySelector(".check");
 const guessInput = document.querySelector(".guess");
@@ -30,13 +30,26 @@ button.addEventListener("click", function() {
       // update span score element in DOM
       scoreSpan.innerText = score
     } else if(guess > secretNum) {
-      message.textContent = "📈 Guess is too high!"
-      // decrease score
-      score -= 1
-      scoreSpan.innerText = score
+      if(score > 1) {
+        message.textContent = "📈 Guess is too high!"
+        // decrease score
+        score -= 1
+        scoreSpan.innerText = score
+      } else {
+        message.textContent = "You lost the game!"
+      }
+
     } else if (guess < secretNum) {
-      message.textContent = "📉 Guess is too low! Try again"
-      // decrease score
+      if(score > 1) {
+        message.textContent = "📉 Guess is too low! Try again"
+        // decrease score
+        score -= 1
+        scoreSpan.innerText = score
+      } else {
+        message.textContent = "You lost the game!"
+      }
+
     }
+
 })
 
